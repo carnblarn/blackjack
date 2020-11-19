@@ -23,7 +23,7 @@ function App() {
         fetchData();
     }, []);
 
-    const drawCard = useCallback(() => {
+    const drawCard = () => {
         if (!deckId) {
             return;
         }
@@ -35,26 +35,23 @@ function App() {
                 setWinner('HOUSE');
             }
         });
-    }, [deckId, playerCards]);
+    };
 
-    const stand = useCallback(() => {
+    const stand = () => {
         const winner = calculateWinner(playerCards, houseCards);
         setWinner(winner);
-    }, [playerCards, houseCards]);
+    };
 
-    const playAgain = useCallback(() => {
-        async function fetchData() {
-            if (!deckId) {
-                return;
-            }
-            await reshuffleDeck(deckId);
-            const cards = (await drawCards(deckId, 4)).cards;
-            setPlayerCards(cards.slice(0, 2));
-            setHouseCards(cards.slice(2, 4));
-            setWinner(undefined);
+    const playAgain = async () => {
+        if (!deckId) {
+            return;
         }
-        fetchData();
-    }, [deckId]);
+        await reshuffleDeck(deckId);
+        const cards = (await drawCards(deckId, 4)).cards;
+        setPlayerCards(cards.slice(0, 2));
+        setHouseCards(cards.slice(2, 4));
+        setWinner(undefined);
+    };
 
     const playerScore = calculatePoints(playerCards);
     const houseScore = calculatePoints(houseCards);
