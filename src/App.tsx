@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { drawCards, shuffleNewDeck, reshuffleDeck } from './api/deckOfCardsApi';
 import { Card } from './api/types';
 import './App.css';
